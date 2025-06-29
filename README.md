@@ -5,7 +5,7 @@ This is the final config for our n8n self-hosted rig: nginx config and docker-co
 
 ```
 server {
-    server_name n8n.cyberizewebdevelopment.com;
+    server_name n8n.cyb**********ent.com;
     
     location / {
         proxy_pass http://localhost:5678;
@@ -32,24 +32,24 @@ server {
     }
     
     listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/n8n.cyberizewebdevelopment.com/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/n8n.cyberizewebdevelopment.com/privkey.pem; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/n8n.cyb*********ent.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/n8n.cyb********ent.com/privkey.pem; # managed by Certbot
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 }
 
 server {
-    if ($host = n8n.cyberizewebdevelopment.com) {
+    if ($host = n8n.cyb**********ent.com) {
         return 301 https://$host$request_uri;
     } # managed by Certbot
     
     listen 80;
-    server_name n8n.cyberizewebdevelopment.com;
+    server_name n8n.cyb**********ent.com;
     return 404; # managed by Certbot
 }
 ```
 
-## The docker-compose.yml w/ proxy trust var is essential for 'connection lost' error fix
+## The docker-compose.yml with proxy trust & websocket vars is essential for 'connection lost' error fix
 
 ```
 version: "3.8"
@@ -66,8 +66,8 @@ services:
       - TZ=America/New_York
       
       # --- CORE URL Configuration ---
-      - N8N_URL=https://n8n.cyberizewebdevelopment.com
-      - WEBHOOK_URL=https://n8n.cyberizewebdevelopment.com
+      - N8N_URL=https://n8n.cyb********ent.com
+      - WEBHOOK_URL=https://n8n.cyb*********ent.com
       
       # --- CRITICAL: Enable Express Proxy Trust ---
       - N8N_PROXY_TRUST=true
@@ -82,8 +82,8 @@ services:
       - N8N_SMTP_HOST=smtp.resend.com
       - N8N_SMTP_PORT=465
       - N8N_SMTP_USER=resend
-      - N8N_SMTP_PASS=re_JTNwA6CA_6zbsd9BdAKBsHZtEerufNMnJ
-      - N8N_SMTP_SENDER=invitations@cyberizedev.com
+      - N8N_SMTP_PASS=re_JTNw**************rufNMnJ
+      - N8N_SMTP_SENDER=invitations@cy*****dev.com
       - N8N_SMTP_SSL=true
       - N8N_USER_MANAGEMENT=true
       - N8N_USER_INVITATION=true
